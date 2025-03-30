@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建评测任务</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .radio-card:has(input:checked) {
+            background-color: #EBF5FF;
+            border-color: #BFDBFE;
+        }
+        .radio-card:has(input:checked) .title {
+            color: #3B82F6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 创建任务页面 -->
+    <div class="min-h-screen">
+        <!-- 返回导航 -->
+        <nav class="bg-white border-b border-gray-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center h-14">
+                    <a href="#" class="flex items-center text-gray-500 hover:text-gray-700">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        返回
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 主要内容区 -->
+        <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- 表单区域 -->
+            <div class="bg-white border border-gray-200 rounded-md">
+                <!-- 表单头部 -->
+                <div class="border-b border-gray-200">
+                    <div class="px-6 py-4">
+                        <h2 class="text-lg font-medium text-gray-900">创建评测任务</h2>
+                    </div>
+                </div>
+
+                <!-- 基本信息 -->
+                <div class="p-6 space-y-6">
+                    <div class="border-l-2 border-blue-500 pl-4">
+                        <h3 class="text-base font-medium text-gray-900">基本信息</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                任务名称
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" 
+                                   placeholder="AI模型客服评测" 
+                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">描述</label>
+                            <div class="relative">
+                                <textarea rows="3" 
+                                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                                <div class="absolute bottom-2 right-2 text-sm text-gray-500">0/300</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                评测对象
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <div class="flex items-center space-x-2">
+                                    <span class="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-700 bg-gray-50">
+                                        知识库.xlsx
+                                        <button class="ml-2 text-gray-400 hover:text-gray-500">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    </span>
+                                    <span class="text-sm text-gray-500">支持上传一个大小100M，1000行数据的excel文件</span>
+                                    <a href="#" class="text-sm text-blue-500 hover:text-blue-600">下载数据集模板</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-2 border-blue-500 pl-4 mt-8">
+                        <h3 class="text-base font-medium text-gray-900">评测配置</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                任务类型
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio text-blue-500" name="task-type" checked>
+                                    <span class="ml-2 text-sm text-gray-700">单轮任务评测</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                评测方式
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1 grid grid-cols-2 gap-4">
+                                <div class="radio-card border rounded-md p-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" class="form-radio text-blue-500" name="eval-type" checked>
+                                        <span class="ml-2 text-sm font-medium title">推理+自动评测</span>
+                                    </label>
+                                    <p class="mt-1 text-sm text-gray-500">完成结果推理后，执行自动评测</p>
+                                </div>
+                                <div class="radio-card border rounded-md p-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" class="form-radio text-blue-500" name="eval-type">
+                                        <span class="ml-2 text-sm font-medium title">仅推理</span>
+                                    </label>
+                                    <p class="mt-1 text-sm text-gray-500">仅输出推理结果</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                评测方法
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="mt-1 grid grid-cols-2 gap-4">
+                                <div class="radio-card border rounded-md p-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" class="form-radio text-blue-500" name="eval-method" checked>
+                                        <span class="ml-2 text-sm font-medium title">大模型匹配打分</span>
+                                    </label>
+                                    <p class="mt-1 text-sm text-gray-500">适用于需要模型提供标准答案相似问的项目，模型还会额外补充完整信息，但不影响得分</p>
+                                </div>
+                                <div class="radio-card border rounded-md p-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" class="form-radio text-blue-500" name="eval-method">
+                                        <span class="ml-2 text-sm font-medium title">裁判员模型打分</span>
+                                    </label>
+                                    <p class="mt-1 text-sm text-gray-500">使用大模型作为裁判员，对模型生成结果进行自动化打分（1、2分），适用于开放性或复杂问题场景</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                打分标准
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <textarea rows="4" 
+                                          placeholder="你是一个专业客服专家，你懂得建立良好的客户关系、维修、产品知识、公司的特殊知识状况。&#10;打分标准：回答与标准答案无相关性打0分；回答与标准答案有几个相同打1分；回答完整有用，但有歧义或不完整打1分。" 
+                                          class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                                <div class="absolute bottom-2 right-2 text-sm text-gray-500">91/300</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表单底部 -->
+                <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <div class="flex items-start mb-4">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <p class="ml-2 text-sm text-blue-700">
+                            提示：提交评测任务将消耗大量token，请合理规划使用。
+                        </p>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            保存评测任务
+                        </button>
+                        <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            提交评测任务
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 校验失败页面 -->
+    <div class="min-h-screen bg-gray-50 py-8" style="display: none;">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-red-100">
+                                <svg class="h-6 w-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">数据集校验失败</h3>
+                            <p class="mt-1 text-sm text-gray-500">
+                                query字段必填，请填写好每一行数据后重新上传
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-gray-50">
+                    <div class="flex justify-end">
+                        <button class="px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
